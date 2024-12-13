@@ -1,0 +1,19 @@
+<a routerLink="/client" class="btn btn-primary">Retour</a>
+<form [formGroup]="form">
+  <h1>Modifier le client suivant : </h1>
+  <mat-form-field appearance="outline" >
+    <mat-label>Nom</mat-label>
+    <input matInput type="text" formControlName="nom">
+    @if (form.get('nom')?.hasError('required')) {
+      <mat-error>Nom is required</mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field appearance="outline" >
+    <mat-label>Style</mat-label>
+    <input matInput type="text" formControlName="telephone">
+    @if (form.get('telephone')?.hasError('required')) {
+      <mat-error>telephone is required</mat-error>
+    }
+  </mat-form-field>
+  <button mat-stroked-button (click)="submit()" [disabled]="form.invalid">Modifier</button>
+</form>

@@ -10,14 +10,11 @@ import {Tatoueur} from '../../../models/tatoueur.model';
   styleUrl: './tatoueur-view.component.css'
 })
 export class TatoueurViewComponent {
-  tatoueur!: Tatoueur;
-
-  constructor(private tatoueurService: TatoueurService, private route: ActivatedRoute) {
-  }
-
-  ngOnInit(): void {
+  tatoueur!:Tatoueur;
+  constructor(private tatoueurService: TatoueurService, private route: ActivatedRoute ) { }
+  ngOnInit():void{
     let id = this.route.snapshot.params['tatoueurId'];
-    this.tatoueurService.findById(id).subscribe((data: Tatoueur) => {
+    this.tatoueurService.findById(id).subscribe((data: Tatoueur)=>{
       this.tatoueur = data;
     });
   }

@@ -1,6 +1,4 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {TatoueurService} from '../../services/tatoueur.service';
-import {Tatoueur} from '../../models/tatoueur.model';
 import {AuthService} from '../../services/auth.service';
 import {RouterLink, RouterOutlet} from '@angular/router';
 import {
@@ -13,21 +11,23 @@ import {
 import {MatAnchor, MatButton} from '@angular/material/button';
 import {MatPaginator} from '@angular/material/paginator';
 import {NgIf} from '@angular/common';
+import {Projet} from '../../models/projet.model';
+import {ProjetService} from '../../services/projet.service';
 @Component({
-  selector: 'app-tatoueur',
+  selector: 'app-projet',
   standalone: true,
   imports: [ RouterLink, MatTable, MatColumnDef, MatHeaderCell, MatCell, MatAnchor,
     MatButton, MatHeaderRow, MatRow, MatRowDef, MatHeaderRowDef, MatCellDef, MatHeaderCellDef,
     NgIf],
-  templateUrl: './tatoueur.component.html',
-  styleUrl: './tatoueur.component.css'
+  templateUrl: './projet.component.html',
+  styleUrl: './projet.component.css'
 })
-export class TatoueurComponent implements OnInit {
+export class ProjetComponent implements OnInit {
 //Variable de classe qui contiendra notre tableau de tatoueurs
-  tatoueurs: Tatoueur[] = [];
-  displayedColumns: string[] = ['nom', 'style','action'];
+  projets: Projet[] = [];
+  displayedColumns: string[] = ['nom', 'description','action'];
 
-  constructor(private auth: AuthService, private tatoueurService: TatoueurService) {
+  constructor(private auth: AuthService, private projetService: ProjetService) {
   }
 
   authenticated() {
@@ -37,15 +37,15 @@ export class TatoueurComponent implements OnInit {
 //Fonction exécutée à l'initiation du component
   ngOnInit(): void {
 //Récupère les données du tatoueurService.
-    this.tatoueurService.getTatoueurs().subscribe((data: Tatoueur[]) => {
+    this.projetService.getProjets().subscribe((data: Projet[]) => {
 //Mets les données dans notre variable de classe tatoueurs
-      this.tatoueurs = data;
+      this.projets = data;
     });
   }
 
   deleteTatoueur(id: number) {
-    this.tatoueurService.delete(id).subscribe(res => {
-      this.tatoueurs = this.tatoueurs.filter(item => item.id !== id);
+    this.projetService.delete(id).subscribe(res => {
+      this.projets= this.projets.filter(item => item.id !== id);
     })
   }
 }

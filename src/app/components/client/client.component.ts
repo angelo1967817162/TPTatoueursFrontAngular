@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {TatoueurService} from '../../services/tatoueur.service';
-import {Tatoueur} from '../../models/tatoueur.model';
+
 import {AuthService} from '../../services/auth.service';
 import {RouterLink, RouterOutlet} from '@angular/router';
 import {
@@ -13,39 +12,34 @@ import {
 import {MatAnchor, MatButton} from '@angular/material/button';
 import {MatPaginator} from '@angular/material/paginator';
 import {NgIf} from '@angular/common';
+import {ClientService} from '../../services/client.service';
+import {Client} from '../../models/client.model';
 @Component({
-  selector: 'app-tatoueur',
+  selector: 'app-client',
   standalone: true,
-  imports: [ RouterLink, MatTable, MatColumnDef, MatHeaderCell, MatCell, MatAnchor,
+  imports: [RouterOutlet, RouterLink, MatTable, MatColumnDef, MatHeaderCell, MatCell, MatAnchor,
     MatButton, MatHeaderRow, MatRow, MatRowDef, MatHeaderRowDef, MatCellDef, MatHeaderCellDef,
     NgIf],
-  templateUrl: './tatoueur.component.html',
-  styleUrl: './tatoueur.component.css'
+  templateUrl: './client.component.html',
+  styleUrl: './client.component.css'
 })
-export class TatoueurComponent implements OnInit {
+export class ClientComponent implements OnInit{
 //Variable de classe qui contiendra notre tableau de tatoueurs
-  tatoueurs: Tatoueur[] = [];
-  displayedColumns: string[] = ['nom', 'style','action'];
-
-  constructor(private auth: AuthService, private tatoueurService: TatoueurService) {
-  }
-
-  authenticated() {
-    return this.auth.authenticated;
-  }
-
+  clients:Client[]=[];
+  displayedColumns: any[] = ['nom', 'style','action'];
+  constructor(private auth: AuthService,private clientService: ClientService) { }
+  authenticated() { return this.auth.authenticated; }
 //Fonction exécutée à l'initiation du component
-  ngOnInit(): void {
+  ngOnInit():void{
 //Récupère les données du tatoueurService.
-    this.tatoueurService.getTatoueurs().subscribe((data: Tatoueur[]) => {
+    this.clientService.getClients().subscribe((data:Client[])=> {
 //Mets les données dans notre variable de classe tatoueurs
-      this.tatoueurs = data;
+      this.clients = data;
     });
   }
-
-  deleteTatoueur(id: number) {
-    this.tatoueurService.delete(id).subscribe(res => {
-      this.tatoueurs = this.tatoueurs.filter(item => item.id !== id);
+  deleteTatoueur(id:number){
+    this.clientService.delete(id).subscribe(res => {
+      this.clients = this.clients.filter(item => item.id !== id);
     })
   }
 }
