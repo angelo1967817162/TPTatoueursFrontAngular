@@ -24,7 +24,7 @@ export class ProjetCreateComponent {
     });
   }
   submit(){
-    this.projetService.addProjet(this.form.value).subscribe((res:any) => {
+    this.projetService.addProjets(this.form.value).subscribe((res:any) => {
       this.router.navigate(['/projet']);
     })
   }

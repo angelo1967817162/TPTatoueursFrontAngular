@@ -26,7 +26,7 @@ import {Client} from '../../models/client.model';
 export class ClientComponent implements OnInit{
 //Variable de classe qui contiendra notre tableau de tatoueurs
   clients:Client[]=[];
-  displayedColumns: any[] = ['nom', 'style','action'];
+  displayedColumns: any[] = ['nom', 'telephone','action'];
   constructor(private auth: AuthService,private clientService: ClientService) { }
   authenticated() { return this.auth.authenticated; }
 //Fonction exécutée à l'initiation du component
@@ -37,7 +37,7 @@ export class ClientComponent implements OnInit{
       this.clients = data;
     });
   }
-  deleteTatoueur(id:number){
+  deleteClient(id:number){
     this.clientService.delete(id).subscribe(res => {
       this.clients = this.clients.filter(item => item.id !== id);
     })

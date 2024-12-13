@@ -13,6 +13,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {NgIf} from '@angular/common';
 import {Projet} from '../../models/projet.model';
 import {ProjetService} from '../../services/projet.service';
+import {TatoueurService} from '../../services/tatoueur.service';
 @Component({
   selector: 'app-projet',
   standalone: true,
@@ -25,9 +26,9 @@ import {ProjetService} from '../../services/projet.service';
 export class ProjetComponent implements OnInit {
 //Variable de classe qui contiendra notre tableau de tatoueurs
   projets: Projet[] = [];
-  displayedColumns: string[] = ['nom', 'description','action'];
+  displayedColumns: string[] = ['nom', 'description','tatoueur','action'];
 
-  constructor(private auth: AuthService, private projetService: ProjetService) {
+  constructor(private auth: AuthService, private projetService: ProjetService,private tatoueurService:TatoueurService) {
   }
 
   authenticated() {
@@ -43,7 +44,8 @@ export class ProjetComponent implements OnInit {
     });
   }
 
-  deleteTatoueur(id: number) {
+
+  deleteProjet(id: number) {
     this.projetService.delete(id).subscribe(res => {
       this.projets= this.projets.filter(item => item.id !== id);
     })

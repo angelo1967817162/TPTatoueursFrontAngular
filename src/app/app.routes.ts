@@ -8,6 +8,10 @@ import {ClientViewComponent} from './components/client/client-view/client-view.c
 import {ClientComponent} from './components/client/client.component';
 import {ClientCreateComponent} from './components/client/client-create/client-create.component';
 import {ClientEditComponent} from './components/client/client-edit/client-edit.component';
+import {ProjetComponent} from './components/projet/projet.component';
+import {ProjetViewComponent} from './components/projet/projet-view/projet-view.component';
+import {ProjetCreateComponent} from './components/projet/projet-create/projet-create.component';
+import {ProjetEditComponent} from './components/projet/projet-edit/projet-edit.component';
 export const routes: Routes = [
   {
     path: 'tatoueur',
@@ -48,5 +52,21 @@ export const routes: Routes = [
     path: 'client/:clientId/edit',
     component: ClientEditComponent
   },
-
+  {
+    path: 'projet',
+    title: 'Nos projet',
+    component: ProjetComponent,
+  },
+  {
+    path: 'projet/:projetId/view',
+    component: ProjetViewComponent
+  },
+  {
+    path: 'projet/create',
+    component: ProjetCreateComponent
+  },
+  {
+    path: 'projet/:projetId/edit',
+    component: ProjetEditComponent
+  },
 ];

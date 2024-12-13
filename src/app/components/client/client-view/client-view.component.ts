@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {Client} from '../../../models/client.model';
 import {ClientService} from '../../../services/client.service';
+import {ProjetComponent} from '../../projet/projet.component';
 @Component({
   selector: 'app-client-view',
   standalone: true,
-  imports: [ RouterLink],
+  imports: [RouterLink, ProjetComponent],
   templateUrl: './client-view.component.html',
   styleUrl: './client-view.component.css'
 })
